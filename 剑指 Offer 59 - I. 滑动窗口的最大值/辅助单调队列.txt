@@ -1,0 +1,19 @@
+class Solution {
+public
+    vectorint maxSlidingWindow(vectorint& nums, int k) {
+        if(nums.empty()) return {};
+        vectorint ans;
+        dequeint q;
+         左边界1-k  n-k   右边界 0   n-1
+        for(int i = 1 - k, j = 0; j  nums.size(); i++, j++)
+        {
+             窗口形成后，需动态维护窗口大小
+            if(i  0 && q.front() == nums[i-1]) q.pop_front();
+             加入新元素后，动态更新队列的值，使得队列不严格递减
+            while(!q.empty() && q.back()  nums[j]) q.pop_back();
+            q.push_back(nums[j]); 
+            if(i = 0) ans.push_back(q.front());
+        }
+        return ans;
+    }
+};

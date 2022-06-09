@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        if(nums.empty()) return {};
+        vector<int> ans;
+        priority_queue<int,vector<int>> pq;
+        for(int j = k; j <= nums.size(); j++)
+        {
+            createBig(pq, nums, j, k);
+            ans.push_back(pq.top());
+        }
+        return ans;
+    }
+
+    void createBig(priority_queue<int,vector<int>> &pq,vector<int> nums, int j, int k){
+        pq = {};
+        for(int i = j - k; i < j; i++)
+            pq.push(nums[i]);
+    }
+};
